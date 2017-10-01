@@ -67,7 +67,7 @@ base_directories = ["/volume1/photo/Home Pictures/Josh Phone",
                     "/volume1/photo/Home Pictures/Monika Phone/WhatsApp Video"]
 
 # destination_dir = "C:\\Users\\Josh\\Pictures"
-destination_dir = "/volume1/photo/Home Pictures$"
+destination_dir = "/volume1/photo/Home Pictures"
 
 file_types = [".jpg", ".mp4", ".png", ".JPG"]
 
