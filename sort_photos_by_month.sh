@@ -1,0 +1,1 @@
+python /volume1/homes/admin/Scripts/sort_photos_by_month.py
