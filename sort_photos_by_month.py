@@ -1,7 +1,7 @@
 import datetime
 import os
 import shutil
-
+from random import randint
 
 def sort_photos_by_month(base_dir_array, dest_dir, file_type_array):
     for each_directory in base_dir_array:
@@ -42,12 +42,18 @@ def sort_photos_by_month(base_dir_array, dest_dir, file_type_array):
 
             new_file_full_path = new_file_destination + "/" + each_file
 
-            # DELETE THE FILE FROM THE SOURCE DIR IF IT ALREADY EXISTS
-            # MOVE THE FILE TO THE NEW DIR IF IT DOES NOT ALREADY EXIST
+            # DUPPLICATE THE FILE FROM THE SOURCE DIR IF IT ALREADY EXISTS (ADD RANDOM INT TO FILENAME)
             if os.path.exists(new_file_full_path):
                 print "File: " + new_file_full_path + \
                       " exists, delete from source DIR: " + file_path
-                os.remove(each_file)
+
+                file_name = each_file.split(".")[0]
+                file_ext = each_file.split(".")[1]
+
+                new_file_full_path = new_file_destination + "/" + file_name + "_" + str(randint(0, 1000000)) + "." + file_ext
+                shutil.move(each_file, new_file_full_path)
+
+            # MOVE THE FILE TO THE NEW DIR IF IT DOES NOT ALREADY EXIST
             else:
                 try:
                     shutil.move(each_file, new_file_full_path)
@@ -62,13 +68,16 @@ def sort_photos_by_month(base_dir_array, dest_dir, file_type_array):
 base_directories = ["/volume1/photo/Home Pictures/Josh Phone",
                     "/volume1/photo/Home Pictures/Josh Phone/WhatsApp Images",
                     "/volume1/photo/Home Pictures/Josh Phone/WhatsApp Video",
+                    "/volume1/photo/Home Pictures/Josh Phone/Snapseed",
                     "/volume1/photo/Home Pictures/Monika Phone",
                     "/volume1/photo/Home Pictures/Monika Phone/WhatsApp Images",
-                    "/volume1/photo/Home Pictures/Monika Phone/WhatsApp Video"]
+                    "/volume1/photo/Home Pictures/Monika Phone/WhatsApp Video",
+                    "/volume1/photo/Home Pictures/Monika Phone/Snapseed"
+                    ]
 
 # destination_dir = "C:\\Users\\Josh\\Pictures"
 destination_dir = "/volume1/photo/Home Pictures"
 
-file_types = [".jpg", ".mp4", ".png", ".JPG"]
+file_types = [".jpg", ".mp4", ".png", ".JPG", "jpeg"]
 
 sort_photos_by_month(base_directories, destination_dir, file_types)
